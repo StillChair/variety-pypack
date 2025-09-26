@@ -560,7 +560,7 @@ def sphcUC(current_unit, new_unit, inputValue, mMass=0.0):
                         raise ValueError("Peso molecular necesario para conversión mol/kg")
                     return inputValue / (mMass / 1000)
 
-        # ============ CAPACIDAD CALORÍFICA ESPECÍFICA (BASE MOLAR) ============
+        # Molar based
         case 'j/molk' | 'j/mol.k':
             match current_unit:
                 case 'j/molk' | 'j/mol.k':
@@ -1366,6 +1366,7 @@ def example():
 
 
     example()
+
 
 
 
