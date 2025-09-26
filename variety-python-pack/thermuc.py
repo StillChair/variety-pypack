@@ -499,130 +499,130 @@ def sphcUC(current_unit, new_unit, inputValue, mMass=0.0):
         # Mass based
         case 'j/kgk' | 'j/kg.k':
             match current_unit:
-                case 'kj/kgk' | 'kj/kg.k':
-                    return inputValue / 1000
-                case 'mj/kgk' | 'mj/kg.k':
-                    return inputValue / 1000000
-                case 'j/molk' | 'j/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / (mMass / 1000)
-                case 'kj/molk' | 'kj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / (mMass / 1000) / 1000
-                case 'mj/molk' | 'mj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / (mMass / 1000) / 1000000
                 case 'j/kgk' | 'j/kg.k':
                     return inputValue
+                case 'kj/kgk' | 'kj/kg.k':
+                    return inputValue * 1000
+                case 'mj/kgk' | 'mj/kg.k':
+                    return inputValue * 1000000
+                case 'j/molk' | 'j/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / (mMass / 1000)  # mMass en g/mol, convertir a kg/mol
+                case 'kj/molk' | 'kj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue * 1000 / (mMass / 1000)
+                case 'mj/molk' | 'mj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue * 1000000 / (mMass / 1000)
 
         case 'kj/kgk' | 'kj/kg.k':
             match current_unit:
                 case 'j/kgk' | 'j/kg.k':
-                    return inputValue * 1000
-                case 'mj/kgk' | 'mj/kg.k':
-                    return inputValue / 1000 
-                case 'j/molk' | 'j/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue * 1000 / (mMass / 1000) 
-                case 'kj/molk' | 'kj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / (mMass / 1000) 
-                case 'mj/molk' | 'mj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / 1000 / (mMass / 1000) 
+                    return inputValue / 1000
                 case 'kj/kgk' | 'kj/kg.k':
                     return inputValue
+                case 'mj/kgk' | 'mj/kg.k':
+                    return inputValue * 1000
+                case 'j/molk' | 'j/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / 1000 / (mMass / 1000)
+                case 'kj/molk' | 'kj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / (mMass / 1000)
+                case 'mj/molk' | 'mj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue * 1000 / (mMass / 1000)
 
         case 'mj/kgk' | 'mj/kg.k':
             match current_unit:
                 case 'j/kgk' | 'j/kg.k':
-                    return inputValue * 1000000 
+                    return inputValue / 1000000
                 case 'kj/kgk' | 'kj/kg.k':
-                    return inputValue * 1000 
-                case 'j/molk' | 'j/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue * 1000000 / (mMass / 1000)
-                case 'kj/molk' | 'kj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue * 1000 / (mMass / 1000) 
-                case 'mj/molk' | 'mj/mol.k':
-                    if mMass == 0:
-                        raise ValueError("This conversion requires a molar mass input")
-                    return inputValue / (mMass / 1000) 
+                    return inputValue / 1000
                 case 'mj/kgk' | 'mj/kg.k':
                     return inputValue
+                case 'j/molk' | 'j/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / 1000000 / (mMass / 1000)
+                case 'kj/molk' | 'kj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / 1000 / (mMass / 1000)
+                case 'mj/molk' | 'mj/mol.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión mol/kg")
+                    return inputValue / (mMass / 1000)
 
-        # Molar based
+        # ============ CAPACIDAD CALORÍFICA ESPECÍFICA (BASE MOLAR) ============
         case 'j/molk' | 'j/mol.k':
             match current_unit:
+                case 'j/molk' | 'j/mol.k':
+                    return inputValue
                 case 'kj/molk' | 'kj/mol.k':
-                    return inputValue / 1000 
+                    return inputValue * 1000
                 case 'mj/molk' | 'mj/mol.k':
-                    return inputValue / 1000000 
+                    return inputValue * 1000000
                 case 'j/kgk' | 'j/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) 
+                    return inputValue * (mMass / 1000)  # mMass en g/mol, convertir a kg/mol
                 case 'kj/kgk' | 'kj/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) / 1000 
+                    return inputValue * 1000 * (mMass / 1000)
                 case 'mj/kgk' | 'mj/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) / 1000000  
-                case 'j/molk' | 'j/mol.k':
-                    return inputValue
+                    return inputValue * 1000000 * (mMass / 1000)
 
         case 'kj/molk' | 'kj/mol.k':
             match current_unit:
                 case 'j/molk' | 'j/mol.k':
-                    return inputValue * 1000 
-                case 'mj/molk' | 'mj/mol.k':
-                    return inputValue / 1000 
-                case 'j/kgk' | 'j/kg.k':
-                    if mMass == 0:
-                        raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * 1000 * (mMass / 1000)
-                case 'kj/kgk' | 'kj/kg.k':
-                    if mMass == 0:
-                        raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) 
-                case 'mj/kgk' | 'mj/kg.k':
-                    if mMass == 0:
-                        raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) / 1000 
+                    return inputValue / 1000
                 case 'kj/molk' | 'kj/mol.k':
                     return inputValue
-
-        case 'mj/molk' | 'mj/mol.k':
-            match current_unit:
-                case 'j/molk' | 'j/mol.k':
-                    return inputValue * 1000000 
-                case 'kj/molk' | 'kj/mol.k':
+                case 'mj/molk' | 'mj/mol.k':
                     return inputValue * 1000
                 case 'j/kgk' | 'j/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * 1000000 * (mMass / 1000)
+                    return inputValue / 1000 * (mMass / 1000)
                 case 'kj/kgk' | 'kj/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * 1000 * (mMass / 1000) 
+                    return inputValue * (mMass / 1000)
                 case 'mj/kgk' | 'mj/kg.k':
                     if mMass == 0:
                         raise ValueError("Peso molecular necesario para conversión kg/mol")
-                    return inputValue * (mMass / 1000) 
+                    return inputValue * 1000 * (mMass / 1000)
+
+        case 'mj/molk' | 'mj/mol.k':
+            match current_unit:
+                case 'j/molk' | 'j/mol.k':
+                    return inputValue / 1000000
+                case 'kj/molk' | 'kj/mol.k':
+                    return inputValue / 1000
                 case 'mj/molk' | 'mj/mol.k':
                     return inputValue
+                case 'j/kgk' | 'j/kg.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión kg/mol")
+                    return inputValue / 1000000 * (mMass / 1000)
+                case 'kj/kgk' | 'kj/kg.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión kg/mol")
+                    return inputValue / 1000 * (mMass / 1000)
+                case 'mj/kgk' | 'mj/kg.k':
+                    if mMass == 0:
+                        raise ValueError("Peso molecular necesario para conversión kg/mol")
+                    return inputValue * (mMass / 1000)
                 
         case _:
             raise ValueError(f"Could not find unit {new_unit}")
